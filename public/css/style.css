@@ -1,0 +1,206 @@
+.main-container{
+/*
+	border-style: solid;
+	border-color: red;
+	border-width: 5px;
+*/
+	min-height: 100vh;
+	padding: 10px;
+	background-color: rgb(175, 202, 221);
+}
+
+
+a.ui-link{
+	text-shadow: none;
+}
+
+
+/********************************************************************
+*         					left side 						        *
+********************************************************************/
+
+.ui-block-a.left-content{
+	min-height: 100vh;
+	width: 20%;
+	background-color: rgb(35, 49, 75);
+}
+
+.left-content > .side-bar{
+	margin-top: 0px;
+}
+
+.project-block a.ui-btn{
+	background-color: rgb(61,108,150);
+	color: rgb(244,255,255);
+	text-shadow: none;
+	text-align: left;
+	border-style: none;
+	padding: 13px 16px 13px 40px;
+}
+
+.project-block a.ui-btn:hover{
+	background-color: rgb(229,229,229);
+}
+
+.left-content h3.project-heading{
+	border-style: none;
+	flex-wrap: nowrap;
+}
+
+.left-content h3.project-heading > a{
+	background-color: rgb(61,108,150);
+	color: rgb(244,255,255);
+	text-shadow: none;
+	border-style: none;
+	padding: 13px 16px 13px 40px;
+}
+
+.left-content h3.project-heading > a:hover{
+	background-color: rgb(229,229,229);
+}
+
+.ui-collapsible-heading{
+	border-radius: 0;
+}
+
+h3.project-heading img{
+	height: 25px; 
+	vertical-align: middle; 
+	position: absolute;
+	right: 0px; 
+	padding-right: 10px;
+}
+
+.left-content > .side-bar > .project-block{
+	margin-bottom: 8px;
+}
+
+.left-content .project-block > div{
+	background-color: rgb(35, 49, 75);
+	border-style: none;
+	padding-right: 0px;
+}
+
+.add_bug > a.ui-btn{
+	background-color: rgb(61,108,150);
+	color: rgb(244,255,255);
+	text-shadow: none;
+	text-align: left;
+	border-style: none;
+	padding: 13px 16px 13px 40px;
+}
+
+.add_bug a.ui-btn{
+	background-color: #009245 !important;
+}
+
+.add_bug a.ui-btn:hover{
+	color: white !important;
+	text-shadow: none;
+}
+
+.add_bug a.ui-btn-icon-left:after{
+	background-color: #009245 !important;
+}
+
+.left-content .users-block > div{
+	margin-bottom: 8px;
+}
+
+.left-content .users-block > div > h3.user-heading > a{
+	background-color: rgb(28,40,64) !important;
+	border-style: none !important;
+	color: rgb(244,255,255) !important;
+	text-shadow: none !important;
+} 
+
+/********* users block until the status *********/
+.users-block > div > div{
+	background-color: rgb(35, 49, 75) !important;
+	border-style: none !important;
+}
+
+.users-block > div > div > ul li{
+	margin: 5px 0px 0px 50px;
+}
+
+.users-block > div > div > ul li.ui-last-child{
+	margin: 5px 0px 10px 50px;
+}
+
+.users-block > div > div > ul a{
+	background-color: rgb(28,40,64) !important;
+	color: rgb(244,255,255) !important;
+	text-shadow: none !important;
+	border-style: none !important;	
+}
+/*************************************************/
+
+
+
+/********************************************************************
+*         					right side 						        *
+********************************************************************/
+
+.ui-block-b.right-content{
+	height: 100vh;
+	width: 80%;
+}
+
+/******* top nav ***********/
+.top-nav > a{
+    padding: 13px 16px;
+    width: 15%;
+    margin-right: 1px;
+    margin: 0px !important;
+}
+
+.top-nav > a.ui-btn{
+    background-color: rgb(61,108,150);
+    color: rgb(6,25,42);
+    font-weight: bold;    
+    text-shadow: none;
+    border-style: none;   
+}
+
+.top-nav > a.active{
+	background-color: rgb(229,229,229);
+}
+
+.top-nav > a:hover{
+	color: black;
+	background-color: rgb(229,229,229) !important;
+}
+
+.ui-icon-bug:after{ 
+    background-image: url("../Icons/bugsquasher.png");
+    background-size: 27px 27px;
+    width: 26px;
+    height: 26px;
+}
+
+.ui-icon-checklister:after{ 
+    background-image: url("../Icons/checklister.png");
+    background-size: 27px 27px;
+    width: 26px;
+    height: 26px;
+}
+
+/***************************/
+
+.tab-container{
+	height: 100%; 
+	background-color: rgb(89,89,89);
+}
+
+.tab-content{
+	height: 100%;
+	background-color: rgb(229,229,229);
+	margin-right: 6px;
+	overflow-y:scroll;	
+}
+
+.tab-content > #project-settings{
+	padding: 20px;
+	margin-bottom: 50px;
+}
