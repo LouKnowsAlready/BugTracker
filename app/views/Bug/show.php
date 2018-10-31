@@ -17,7 +17,8 @@ function selected($item1, $item2){
 <div id="project-settings">
 <div id="action">
 	<a rel="external" href="<?php echo "/bug/index/{$bug->project_id}/$bug->assigned_to/$bug->status_id"; ?>"> Back </a> |
-	<a href="#" id="edit"> Edit </a>
+	<a href="#" id="edit"> Edit </a> |
+	<a rel="external" href="<?php echo "/bug/delete/{$bug->project_id}/{$bug->assigned_to}/{$bug->status_id}/{$bug->id}"; ?>"> Delete </a>
 </div>
 <h3> Project Name: <?php echo $project->project_name ?> </h3>
 <hr>

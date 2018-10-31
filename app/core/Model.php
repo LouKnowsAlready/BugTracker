@@ -39,6 +39,17 @@ class Model{
 		}
 	}
 
+	public function delete($table, $filter='1=1'){
+		$db = new DbConnect();
+		$conn = $db->connect();
+
+		$sql = "DELETE FROM {$table} WHERE $filter";
+		if(isset($conn)){
+			mysqli_query($conn, $sql);
+			mysqli_close($conn);
+		}
+	}
+
 
 
 

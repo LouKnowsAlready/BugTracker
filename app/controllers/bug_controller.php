@@ -46,7 +46,6 @@ class BugController extends Controller{
 	}
 
 	public function create(){
-		$id = 0;
 		$data['status_id'] = $_POST['bug']['status_id'];
 		$data['project_id'] = $_POST['bug']['project_id'];
 		$data['user_id'] = $_POST['bug']['assigned_to'];
@@ -63,6 +62,18 @@ class BugController extends Controller{
 		$data['project_id'] = $project_id;
 		
 		include '../app/views/Bug/new.php';
+	}
+
+	public function delete($project_id = 0, $user_id = 0, $status_id=0, $bug_id = 0){
+		$Bug_obj = $this->get_model($this->model_name);
+		$filter = "id = {$bug_id}";
+		$query = $Bug_obj->delete('bugs', $filter);
+
+		$data['project_id'] = $project_id;
+		$data['user_id'] = $user_id;
+		$data['status_id'] = $status_id;
+
+		$this->render_view($this->layout, $this->view_name,'index', $data);
 	}
 
 }
