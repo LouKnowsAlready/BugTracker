@@ -24,8 +24,8 @@ class BugController extends Controller{
 		include '../app/views/Bug/index.php';
 	}
 
-	public function show($project_id = 0, $user_id = 0, $status = 0){
-		$data = array("project_id" => $project_id, "user_id" => $user_id, "status_id" => $status);
+	public function show($project_id = 0, $user_id = 0, $bug_id = 0){
+		$data = array("project_id" => $project_id, "user_id" => $user_id, "bug_id" => $bug_id);
 
 		$this->render_view($this->layout, $this->view_name,'show', $data);
 	}

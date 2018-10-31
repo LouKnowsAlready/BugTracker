@@ -9,21 +9,26 @@ class Bug extends Model{
 	public $status_id;
 	public $details;
 
-	public function __construct($id = 0,
-								$project_id = 0,
-								$bug_name = '',
-								$assigned_to = 0,
-								$priority_id = 0,
-								$status_id = 0,
-								$details = 0)
+	public function __construct($id = 0)
 	{
-		$this->id = $id;
-		$this->project_id = $project_id;
-		$this->bug_name = $bug_name;
-		$this->assigned_to = $assigned_to;
-		$this->priority_id = $priority_id;
-		$this->status_id = $status_id;
-		$this->details = $details;
+		$db = new DbConnect();
+		$conn = $db->connect();
+
+		$sql = "SELECT id, project_id, bug_name, assigned_to, priority_id, status_id, details FROM bugs WHERE id = {$id}";
+		
+		$result = mysqli_query($conn, $sql);
+		$data = mysqli_fetch_assoc($result);
+		mysqli_free_result($result);
+
+		mysqli_close($conn);		
+
+		$this->id = $data['id'];
+		$this->project_id = $data['project_id'];
+		$this->bug_name = $data['bug_name'];
+		$this->assigned_to = $data['assigned_to'];
+		$this->priority_id = $data['priority_id'];
+		$this->status_id = $data['status_id'];
+		$this->details = $data['details'];
 	}
 
 	public static function get_user_distinct_bug_status($project_id, $user_id){

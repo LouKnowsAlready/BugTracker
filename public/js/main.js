@@ -78,6 +78,10 @@ $(document).ready(function() {
 				$("#bug").append(msg).enhanceWithin();
 			}
 		});
-	});	
+	});
+
+	$(".back").on("click", function(){
+		window.history.back();
+	});
 	
 });

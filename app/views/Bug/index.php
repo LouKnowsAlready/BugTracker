@@ -11,7 +11,7 @@
 <ul data-role="listview" data-filter="true" data-filter-placeholder="Search bugs..." data-inset="true">
     <?php
     	foreach($bugs as $bug){
-    		echo "<li><a href='#'>{$bug['bug_name']}</a></li>";
+    		echo "<li><a rel='external' href='/bug/show/{$data['project_id']}/{$data['user_id']}/{$bug['id']}'>{$bug['bug_name']}</a></li>";
     	}
    	?>
 </ul>
