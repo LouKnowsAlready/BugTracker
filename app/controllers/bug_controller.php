@@ -30,6 +30,15 @@ class BugController extends Controller{
 		$this->render_view($this->layout, $this->view_name,'show', $data);
 	}
 
+	public function update($project_id, $user_id, $bug_id){
+		if(isset($_POST['bug'])){
+			$Bug_obj = $this->get_model($this->model_name);
+			$filter = "id = {$bug_id}";
+			$Bug_obj->update($_POST['bug'], 'bugs', $filter);
+		}
+		header("Location: /bug/show/{$project_id}/{$user_id}/{$bug_id}");
+	}
+
 	public function new($project_id){
 		$data['project_id'] = $project_id;
 

@@ -20,6 +20,25 @@ class Model{
 
 	}
 
+	public function update($data, $table, $filter){
+		//include 'dbconnect.php';
+		$db = new DbConnect();
+		$conn = $db->connect();
+
+		$sql = "UPDATE {$table} SET ";
+		foreach($data as $key => $value){
+			$sql = $sql . "{$key} = '{$value}', ";
+		}
+		$sql = rtrim($sql,', ');
+		$sql = $sql . " WHERE {$filter}"; 
+		$sql = preg_replace("/'(\d+)'/", '$1', $sql);
+
+		if(isset($conn)){
+			mysqli_query($conn, $sql);
+			mysqli_close($conn);
+		}
+	}
+
 
 
 

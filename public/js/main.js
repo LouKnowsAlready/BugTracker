@@ -80,8 +80,15 @@ $(document).ready(function() {
 		});
 	});
 
-	$(".back").on("click", function(){
-		window.history.back();
+	$("#edit").on("click", function(){
+		$("#action").empty();
+		$(".ui-state-disabled").removeClass("ui-state-disabled");
+		$(".disabled").prop("disabled", false);
+		$("#action").append("<a href='#' id='cancel'> Cancel </a>");
 	});
-	
+
+	$("#action").on("click", "#cancel", function() {
+		location.reload();
+	});	
+
 });
