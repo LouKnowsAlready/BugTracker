@@ -18,7 +18,7 @@
 	<div data-role="collapsible" class="project-block" <?php echo expand($data_project_id,$project['id']);  ?> >
 		<h3 class="project-heading"> 
 			<?php echo $project['project_name'];  ?>
-			<img src="/Icons/settings.png" />
+			<img class="edit-project" <?php echo "data-project='{$project['id']}'" ?> src="/Icons/settings.png" />
 		</h3>
 		<?php 
 			$users = ProjectUser::get_project_users($project['id']);

@@ -1,7 +1,7 @@
 $(document).ready(function() {  
 	
 	// User New Form: Add and Remove Users
-	$("#add_user").on("click", function() { 	
+	$("#bug").on("click", "#add_user" , function() { 	
 		$.ajax({
 			type: "GET",
 			url: "/user/ajax_get_users_roles",
@@ -11,37 +11,37 @@ $(document).ready(function() {
 		});	
 	 });
 
-	$("#user_list").on("click", "a.remove_user", function() { 	
+	$("#bug").on("click", "a.remove_user", function() { 	
 		$(this).parent().remove();
 	 });
 	// end
 
 	// User New Form: Add and Remove Tags
-	$("#add_tag").on("click", function() {
+	$("#bug").on("click", "#add_tag" ,function() {
 		$("#tag_list").append("<div><input type='text' name='tags[]' /><a class='remove_tag' href='#'>Remove</a></div>").enhanceWithin();
 	});
 
-	$("#tag_list").on("click", "a.remove_tag", function() { 	
+	$("#bug").on("click", "a.remove_tag", function() { 	
 		$(this).parent().remove();
 	 });
 	// end
 
 	// User New Form: Add and Remove Priorities
-	$("#add_priority").on("click", function() {
+	$("#bug").on("click", "#add_priority" , function() {
 		$("#priority_list").append("<div><label>Priority Name: </label><input type='text' name='priorities[priority_name][]' /><label>Priority Weight:</label><input type='number' name='priorities[priority_weight][]' /><a class='remove_priority' href='#'>Remove</a></div>").enhanceWithin();
 	});
 
-	$("#priority_list").on("click", "a.remove_priority", function() { 	
+	$("#bug").on("click", "a.remove_priority", function() { 	
 		$(this).parent().remove();
 	 });
 	//end
 
 	// User New Form: Add and Remove Status
-	$("#add_status").on("click", function() {
+	$("#bug").on("click", "#add_status", function() {
 		$("#status_list").append("<div><input type='text' name='status[]' /><a class='remove_status' href='#'>Remove</a></div>").enhanceWithin();
 	});
 
-	$("#status_list").on("click", "a.remove_status", function() { 	
+	$("#bug").on("click", "a.remove_status", function() { 	
 		$(this).parent().remove();
 	 });
 	// end	
@@ -89,6 +89,24 @@ $(document).ready(function() {
 
 	$("#action").on("click", "#cancel", function() {
 		location.reload();
-	});	
+	});
+
+	$(".edit-project").on("click", function(event, ui){
+		var project_param = $(this).data("project");
+
+		if($("#project-settings").length){
+			$("#project-settings").remove();
+		}
+
+		$.ajax({
+			type: "GET",
+			url: '/project/edit/' + project_param,
+			success: function(msg){
+				$("#bug").append(msg).enhanceWithin();
+			}
+		});
+
+		return false;
+	});
 
 });

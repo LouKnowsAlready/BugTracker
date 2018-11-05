@@ -15,6 +15,10 @@ class ProjectController extends Controller{
 		$this->render_view($this->layout, $this->view_name,'new');
 	}
 
+	public function edit($project_id){
+		include '../app/views/Project/edit.php';
+	}
+
 	public function create(){
 	
 		if(isset($_POST['project'])){

@@ -8,7 +8,7 @@ class ProjectUser extends Model{
 		$db = new DbConnect();
 		$conn = $db->connect();
 
-		$sql = "SELECT u.id, u.first_name, u.last_name FROM project_users pu LEFT JOIN users u ON u.id = pu.user_id WHERE project_id = " . $project_id;
+		$sql = "SELECT pu.id as pid, u.id, u.first_name, u.last_name, CONCAT(first_name, ' ', last_name) as name, pu.role_id, r.role_name FROM project_users pu LEFT JOIN users u ON u.id = pu.user_id LEFT JOIN roles r on r.id = pu.role_id WHERE project_id = " . $project_id;
 		
 		$result = mysqli_query($conn, $sql);
 		$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
