@@ -12,14 +12,14 @@ class UserController extends Controller{
 		include dirname(__DIR__) . "/models/Role.php";
 
 		$users = User::get_all_users();
-		$user_select = "<select name='users[]'>";
+		$user_select = "<select name='users[new][]'>";
 		foreach($users as $user){
 			$user_select = $user_select . "<option value='" . $user['id'] . "'>" . $user['name'] .'</option>';
 		}
 		$user_select = $user_select . '</select>';
 
 		$roles = Role::get_all_roles();
-		$role_select = "<select name='roles[]'>";
+		$role_select = "<select name='roles[new][]'>";
 		foreach($roles as $role){
 			$role_select = $role_select . "<option value='" . $role['id'] . "'>" . $role['role_name'] . '</option>';
 		}

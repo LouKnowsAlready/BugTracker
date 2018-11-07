@@ -12,7 +12,7 @@
 ?>
 
 <div id="project-settings">
-	<form action="" method="POST" data-ajax="false">
+	<form action="/project/update" method="POST" data-ajax="false">
 		<label>Project Name</label>
 		<input type="hidden" name="project_id" value="<?php echo $project_id ?>" />
 		<input type="text" data-clear-btn="true" name="project[project_name]" <?php echo "value='{$project->project_name}'" ?> />
@@ -22,9 +22,11 @@
 		<div id="user_list">
 			<?php
 				foreach($project_users as $user){
+					$proj_user_id = $user['pid'];
 					echo "<div>";
-					echo "<select name='users[]' disabled><option value='{$user['id']}'> {$user['name']} </option></select>";
-					echo "<select name='roles[]'>";
+					echo "<input type='hidden' name='users[{$proj_user_id}]' value='{$user['id']}' />";
+					echo "<select name='users[{$proj_user_id}]' disabled><option value='{$user['id']}'> {$user['name']} </option></select>";
+					echo "<select name='roles[{$proj_user_id}]'>";
 					foreach($roles as $role){
 						$selected = selected($role['id'], $user['role_id']);
 						echo "<option value='{$role['id']}' {$selected}> {$role['role_name']} </option>";
