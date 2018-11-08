@@ -57,5 +57,19 @@ class Bug extends Model{
 
 		mysqli_close($conn);
 		return $data;
+	}
+
+	public static function get_bugs_per_project($project_id){
+		$db = new DbConnect();
+		$conn = $db->connect();
+
+		$sql = "SELECT id, project_id, bug_name, assigned_to, priority_id, status_id, details FROM bugs WHERE project_id = {$project_id}";
+		
+		$result = mysqli_query($conn, $sql);
+		$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
+		mysqli_free_result($result);
+
+		mysqli_close($conn);
+		return $data;
 	}	
 }

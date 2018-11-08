@@ -22,7 +22,7 @@ function selected($item1, $item2){
 </div>
 <h3> Project Name: <?php echo $project->project_name ?> </h3>
 <hr>
-	<form action="/bug/update/<?php echo "$bug->project_id/$bug->assigned_to/$bug->id" ?>" method="POST" data-ajax="false">
+	<form action="/bug/update/<?php echo "$bug->project_id/$bug->assigned_to/$bug->id/$bug->status_id" ?>" method="POST" data-ajax="false">
 		<div>
 			<input type="hidden" name="bug[project_id]" value="<?php echo $project->id ?>" class="disabled" disabled />
 		</div>

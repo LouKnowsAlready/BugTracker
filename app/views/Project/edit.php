@@ -18,6 +18,7 @@
 		<label>Project Name</label>
 		<input type="hidden" name="project_id" value="<?php echo $project_id ?>" />
 		<input type="text" data-clear-btn="true" name="project[project_name]" <?php echo "value='{$project->project_name}'" ?> />
+		<a <?php echo "href='/project/delete/{$project_id}'"; ?> rel="external"> Delete </a>
 		<hr>
 		<label> Project Settings </label>
 		<label> Users </label>

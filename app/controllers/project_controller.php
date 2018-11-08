@@ -19,6 +19,33 @@ class ProjectController extends Controller{
 		include '../app/views/Project/edit.php';
 	}
 
+	public function delete($project_id){
+		$Project_obj = $this->get_model('Project');
+		$ProjectUser_obj = $this->get_model('ProjectUser');
+		$Tag_obj = $this->get_model('Tag');
+		$Priority_obj = $this->get_model('Priority');
+		$Status_obj = $this->get_model('Status');
+		$Bug_obj = $this->get_model('Bug');
+
+		$project_filter = "id = {$project_id}";
+		$filter = "project_id = {$project_id}";
+		
+		$Project_obj->delete('projects', $project_filter);
+		$ProjectUser_obj->delete('project_users', $filter);
+		$Tag_obj->delete('tags', $filter);		
+		$Priority_obj->delete('priorities', $filter);
+		$Status_obj->delete('bug_status', $filter);
+
+		$bugs = Bug::get_bugs_per_project($project_id);
+		if(!empty($bugs)){
+			$bug_filter = "id IN(" . implode(',',$bugs) . ')';
+			$Bug_obj->delete('bug_tags', $bug_filter);
+		}
+		$Bug_obj->delete('bugs', $filter);
+
+		header('Location: /');
+	}
+
 	public function create(){
 	
 		if(isset($_POST['project'])){
@@ -57,9 +84,9 @@ class ProjectController extends Controller{
 				}
 			}
 
-			if(isset($_POST['status'])){
+			if(isset($_POST['status']['new'])){
 				$ProjectStatus_obj = $this->get_model('Status');
-				$status = $_POST['status'];
+				$status = $_POST['status']['new'];
 
 				foreach($status as $stat){
 					$ProjectTag_obj->create(array('project_id' => $id, 'status_name' => $stat), 'bug_status');
