@@ -18,7 +18,7 @@ $(document).ready(function() {
 
 	// User New Form: Add and Remove Tags
 	$("#bug").on("click", "#add_tag" ,function() {
-		$("#tag_list").append("<div><input type='text' name='tags[]' /><a class='remove_tag' href='#'>Remove</a></div>").enhanceWithin();
+		$("#tag_list").append("<div><input type='text' name='tags[new][]' /><a class='remove_tag' href='#'>Remove</a></div>").enhanceWithin();
 	});
 
 	$("#bug").on("click", "a.remove_tag", function() { 	
@@ -28,7 +28,7 @@ $(document).ready(function() {
 
 	// User New Form: Add and Remove Priorities
 	$("#bug").on("click", "#add_priority" , function() {
-		$("#priority_list").append("<div><label>Priority Name: </label><input type='text' name='priorities[priority_name][]' /><label>Priority Weight:</label><input type='number' name='priorities[priority_weight][]' /><a class='remove_priority' href='#'>Remove</a></div>").enhanceWithin();
+		$("#priority_list").append("<div><label>Priority Name: </label><input type='text' name='priorities[priority_name][new][]' /><label>Priority Weight:</label><input type='number' name='priorities[priority_weight][new][]' /><a class='remove_priority' href='#'>Remove</a></div>").enhanceWithin();
 	});
 
 	$("#bug").on("click", "a.remove_priority", function() { 	
@@ -38,7 +38,7 @@ $(document).ready(function() {
 
 	// User New Form: Add and Remove Status
 	$("#bug").on("click", "#add_status", function() {
-		$("#status_list").append("<div><input type='text' name='status[]' /><a class='remove_status' href='#'>Remove</a></div>").enhanceWithin();
+		$("#status_list").append("<div><input type='text' name='status[new][]' /><a class='remove_status' href='#'>Remove</a></div>").enhanceWithin();
 	});
 
 	$("#bug").on("click", "a.remove_status", function() { 	

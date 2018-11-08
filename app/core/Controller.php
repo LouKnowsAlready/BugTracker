@@ -8,20 +8,25 @@ class Controller{
 		return new $model();
 	}
 
-	public function render_view($layout, $view_name, $method_name, $data = []){
+	public function render_view($layout='', $view_name, $method_name, $data = []){
 		// $view_name, $method_name, and $data will be available on the layout
-		include '../app/views/layout/'. $layout . '.php';
+		if($layout == '')
+			include "../app/views/{$view_name}/{$method_name}.php";
+		else
+			include '../app/views/layout/'. $layout . '.php';
 	}
 
 	public function get_deleted_records($data, $items){
 		$del_ids = [];
 	
-		foreach($data as $row){
-  			$id = $row['id'];
-  			
-  			if(!array_key_exists($id,$items)){
-    			array_push($del_ids,$id);
-  			}     
+		if(!empty($data)){
+			foreach($data as $row){
+	  			$id = $row['id'];
+	  			
+	  			if(!array_key_exists($id,$items)){
+	    			array_push($del_ids,$id);
+	  			}     
+			}
 		}
 
 		return $del_ids;

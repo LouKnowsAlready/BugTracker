@@ -1,4 +1,6 @@
 <?php
+	if(isset($data))
+		$project_id = $data;
 	$project = new Project($project_id);
 	$project_users = ProjectUser::get_project_users($project_id);
 	$roles = Role::get_all_roles();
@@ -42,7 +44,7 @@
 		<div id="tag_list">
 			<?php
 				foreach($tags as $tag){
-					echo "<div><input type='text' name='tags[]' value='{$tag['tag_name']}' /><a class='remove_tag' href='#'>Remove</a></div>";
+					echo "<div><input type='text' name='tags[{$tag['id']}]' value='{$tag['tag_name']}' /><a class='remove_tag' href='#'>Remove</a></div>";
 				}
 			?>			
 		</div>
@@ -51,7 +53,7 @@
 		<div id="priority_list">
 			<?php
 				foreach($priorities as $priority){
-					echo "<div><label>Priority Name: </label><input type='text' name='priorities[priority_name][]' value='{$priority['priority_name']}' /><label>Priority Weight:</label><input type='number' name='priorities[priority_weight][]' value='{$priority['priority_weight']}' /><a class='remove_priority' href='#'>Remove</a></div>";
+					echo "<div><label>Priority Name: </label><input type='text' name='priorities[priority_name][{$priority['id']}]' value='{$priority['priority_name']}' /><label>Priority Weight:</label><input type='number' name='priorities[priority_weight][{$priority['id']}]' value='{$priority['priority_weight']}' /><a class='remove_priority' href='#'>Remove</a></div>";
 				}
 			?>				
 		</div>
@@ -60,7 +62,7 @@
 		<div id="status_list">
 			<?php
 				foreach($status as $stat){
-					echo "<div><input type='text' name='status[]' value='{$stat['status_name']}' /><a class='remove_status' href='#'>Remove</a></div>";
+					echo "<div><input type='text' name='status[{$stat['id']}]' value='{$stat['status_name']}' /><a class='remove_status' href='#'>Remove</a></div>";
 				}
 			?>			
 		</div>

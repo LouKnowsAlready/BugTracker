@@ -18,4 +18,10 @@
 		<input type="button" id="add_status" data-inline="true" value="Add Status">
 		<input type="submit" name="submit" value="submit" />
 	</form>
+	<?php
+		// /project/create
+		if(isset($_POST['tags']['new'])){
+			print_r($_POST['tags']['new']);
+		}
+	?>
 </div>
