@@ -77,4 +77,30 @@ class BugController extends Controller{
 		$this->render_view($this->layout, $this->view_name,'index', $data);
 	}
 
+	public function ajax_update_position(){
+		//$conn = new mysqli("localhost","root","","test");
+
+		if(isset($_POST['update'])){
+			$Bug_obj = $this->get_model($this->model_name);
+
+			foreach($_POST['positions'] as $position){
+				$index = $position[0];
+				$newpos = $position[1];
+				$filter = "id = {$index}";
+
+				//$conn->query("UPDATE bugs SET position = $newpos WHERE id = $index");
+				$Bug_obj->update(['position' => $newpos], 'bugs', $filter);
+			}
+			exit('success');
+		}
+	}
+
+	public function ajax_custom_sort(){
+		$data['project_id'] = $_GET['project_id'];
+		$data['user_id'] = $_GET['user_id'];
+		$data['status_id'] = $_GET['status_id'];		
+		
+		include '../app/views/Bug/custom_sort.php';		
+	}
+
 }

@@ -109,4 +109,129 @@ $(document).ready(function() {
 		return false;
 	});
 
+	/****************** Algo inside are used for sorting the bugs ******************/
+
+	// Refer to FS.1 below for the functions being called inside thise algorithm.
+
+	var asc = true;
+
+
+	$('#bug').on('click', '#custom-sort',function(){
+		$("#sort-list").remove();
+		sortElementCustom();
+	});
+
+	$('#bug').on('click', '#alphabetical-sort', function(){
+		if(asc)
+			sortElementAsc();
+		else
+			sortElementDesc();
+		asc = !asc;
+	});
+
+	$('#bug').on('click', '#priority-sort', function(){
+		sortElementPriority();
+	});
+
+	/*******************************************************************************/
+
 });
+
+
+/****** Called functions from JQUERY ready function ***********/
+
+// FS.1 start
+
+function saveNewPosition(){
+	var positions = [];
+
+	$('.updated').each(function(){
+		positions.push([$(this).attr('data-index'), $(this).attr('data-position')]);
+		$(this).removeClass('updated');
+	});
+
+	$.ajax({
+		url: '/bug/ajax_update_position',
+		method: 'POST',
+		dataType: 'text',
+		data: {
+			update: 1,
+			positions: positions
+		},
+		success: function(response){
+			console.log(response);
+		}
+	});
+}
+
+function sortElementAsc(){
+	var $list = $("#sort-list");
+
+	$list.children().detach().sort(function(a, b) {
+	return $(a).text().localeCompare($(b).text());
+	}).appendTo($list);
+}
+
+function sortElementDesc(){
+	var $list = $("#sort-list");
+
+	$list.children().detach().sort(function(a, b) {
+	return $(b).text().localeCompare($(a).text());
+	}).appendTo($list);
+}
+
+function sortElementPriority(){
+	var $list = $("#sort-list");
+
+	/*
+	$list.children().detach().sort(function(a, b) {
+	return ($(b).data('priority')) < ($(a).data('priority')) ? 1 : -1;
+	}).appendTo($list);
+	*/
+
+	$list.children().detach().sort(function(a, b) {
+		if(($(b).data('priority')) < ($(a).data('priority'))){
+			return 1;
+		}
+		else if(($(b).data('priority')) == ($(a).data('priority'))){
+			return $(a).text().localeCompare($(b).text());
+		}
+		else
+			return -1;
+	//return ($(b).data('priority')) < ($(a).data('priority')) ? 1 : -1;
+	}).appendTo($list);
+}
+
+function sortElementCustom(){
+	var project_id = $("#bug-info").data("project");
+	var user_id = $("#bug-info").data("user");
+	var status_id = $("#bug-info").data("status");
+
+	$.ajax({
+			url: '/bug/ajax_custom_sort',
+			method: "GET",
+			dataType: 'text',
+			data: {
+				project_id: project_id,
+				user_id: user_id,
+				status_id: status_id
+			},
+			success: function(msg){
+				$("#bug-list").append(msg).enhanceWithin();
+
+				$('#sort-list').sortable({
+				update: function(event, ui){
+							$(this).children().each(function(index){ // 'this' pertains to tbody because it has the class ui-sortable
+								if($(this).attr('data-position') !=  (index+1)){
+									$(this).attr('data-position', (index+1)).addClass('updated');
+								}
+							});
+
+							saveNewPosition();
+						}
+				});
+			}
+		});
+}
+
+// FS.1 end
