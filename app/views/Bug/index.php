@@ -10,9 +10,14 @@
 	<input type="hidden" id="bug-info" data-user="<?php echo $data['user_id']; ?>" data-status="<?php echo $data['status_id']; ?>" data-project="<?php echo $data['project_id']; ?>" />
 	<hr>
 	<div id="bug-list">
-		<input type="button" id="alphabetical-sort" value="Sort by Name" />
-		<input type="button" id="priority-sort" value="Sort by Priority" />
-		<input type="button" id="custom-sort" value="Custom Sort" />
+		<div id="bug-menu">
+			<div id="sort-buttons">
+				<label>Sort By:</label>
+				<input type="button" id="alphabetical-sort" value="Name" />
+				<input type="button" id="priority-sort" value="Priority" />
+				<input type="button" id="custom-sort" value="Custom" />
+			</div>
+		</div>
 		<ul id="sort-list" data-role="listview" data-filter="true" data-filter-placeholder="Search bugs..." data-inset="true">
 		    <?php
 		    	foreach($bugs as $bug){

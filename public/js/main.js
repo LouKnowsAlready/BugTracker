@@ -76,6 +76,8 @@ $(document).ready(function() {
 			url: '/bug/ajax_index/' + project_param + '/' + user_param + '/' + status_param,
 			success: function(msg){
 				$("#bug").append(msg).enhanceWithin();
+				$('.ui-filterable').prependTo('#bug-menu');
+
 			}
 		});
 	});
@@ -122,6 +124,7 @@ $(document).ready(function() {
 	});
 
 	$('#bug').on('click', '#alphabetical-sort', function(){
+		$('#sort-list').sortable({disabled: true});
 		if(asc)
 			sortElementAsc();
 		else
@@ -130,6 +133,7 @@ $(document).ready(function() {
 	});
 
 	$('#bug').on('click', '#priority-sort', function(){
+		$('#sort-list').sortable({disabled: true});
 		sortElementPriority();
 	});
 
@@ -230,6 +234,8 @@ function sortElementCustom(){
 							saveNewPosition();
 						}
 				});
+
+				$('.ui-filterable').prependTo('#bug-menu');
 			}
 		});
 }
