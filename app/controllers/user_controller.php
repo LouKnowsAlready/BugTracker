@@ -24,8 +24,8 @@ class UserController extends Controller{
 			$role_select = $role_select . "<option value='" . $role['id'] . "'>" . $role['role_name'] . '</option>';
 		}
 		$role_select = $role_select . '</select>';
-		$role_select = $role_select . '<a class="remove_user" href="#">Remove</a>';
+		$role_select = $role_select;
 
-		echo '<div>' . $user_select . $role_select . '</div>';
+		echo '<tr><td>' . $user_select . '</td> <td>' . $role_select . '</td> <td> <a id="delete" class="remove_user ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext" href="#">Remove</a> </td> </tr> ';
 	}
 }

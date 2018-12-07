@@ -16,7 +16,8 @@ class ProjectController extends Controller{
 	}
 
 	public function edit($project_id){
-		include '../app/views/Project/edit.php';
+		//include '../app/views/Project/edit.php';
+		$this->render_view($this->layout, $this->view_name,'edit',$project_id);
 	}
 
 	public function delete($project_id){
@@ -76,11 +77,12 @@ class ProjectController extends Controller{
 				$priorities = $_POST['priorities'];
 				$priority_name = $priorities['priority_name']['new'];
 				$priority_weight = $priorities['priority_weight']['new'];
+				$priority_color = $priorities['priority_color']['new'];
 				$priority_size = count($priority_name);
 
 
 				for($index = 0; $index < $priority_size; $index++){
-					$ProjectPriority_obj->create(array('project_id' => $id, 'priority_name' => $priority_name[$index], 'priority_weight' => $priority_weight[$index]), 'priorities');
+					$ProjectPriority_obj->create(array('project_id' => $id, 'priority_name' => $priority_name[$index], 'priority_weight' => $priority_weight[$index], 'priority_color' => $priority_color[$index]), 'priorities');
 				}
 			}
 
@@ -89,7 +91,7 @@ class ProjectController extends Controller{
 				$status = $_POST['status']['new'];
 
 				foreach($status as $stat){
-					$ProjectTag_obj->create(array('project_id' => $id, 'status_name' => $stat), 'bug_status');
+					$ProjectStatus_obj->create(array('project_id' => $id, 'status_name' => $stat), 'bug_status');
 				}
 			}			
 		}
@@ -107,7 +109,8 @@ class ProjectController extends Controller{
 		$this->update_tags($_POST);
 		$this->update_priorities($_POST);
 		$this->update_status($_POST);
-		$this->render_view($this->layout, $this->view_name,'edit',$_POST['project_id']);
+		//$this->render_view($this->layout, $this->view_name,'edit',$_POST['project_id']);
+		header("Location: /project/edit/{$_POST['project_id']}");
 	}
 
 	private function update_users($data){
@@ -223,7 +226,15 @@ class ProjectController extends Controller{
 				unset($priority_weights['new']); // do not include newly inserted users
 		}
 		else
-			$priority_weights = [];		
+			$priority_weights = [];
+
+		if(isset($data['priorities']['priority_color'])){
+			$priority_colors = $data['priorities']['priority_color'];
+			if(isset($priority_colors['new']))
+				unset($priority_colors['new']); // do not include newly inserted users
+		}
+		else
+			$priority_colors = [];		
 		
 		$project = $data['project_id'];
 
@@ -236,7 +247,8 @@ class ProjectController extends Controller{
 		if(!empty($priorities)){
 			foreach($priorities as $index => $priority){
 	   			$priority_weight = $priority_weights[$index];
-	   			$priority_record = array("priority_name"=>$priority, "priority_weight"=>$priority_weight);
+	   			$priority_color = $priority_colors[$index];
+	   			$priority_record = array("priority_name"=>$priority, "priority_weight"=>$priority_weight, "priority_color"=>$priority_color);
 	   			$filter = "id = {$index}";
 	   			$Priority_obj->update($priority_record, 'priorities', $filter);
 			}
