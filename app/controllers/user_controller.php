@@ -13,6 +13,9 @@ class UserController extends Controller{
 
 		$users = User::get_all_users();
 		$user_select = "<select name='users[new][]'>";
+		$id = uniqid();
+
+
 		foreach($users as $user){
 			$user_select = $user_select . "<option value='" . $user['id'] . "'>" . $user['name'] .'</option>';
 		}
@@ -26,6 +29,6 @@ class UserController extends Controller{
 		$role_select = $role_select . '</select>';
 		$role_select = $role_select;
 
-		echo '<tr><td>' . $user_select . '</td> <td>' . $role_select . '</td> <td> <a id="delete" class="remove_user ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext" href="#">Remove</a> </td> </tr> ';
+		echo '<tr><td>' . $user_select . '</td> <td>' . $role_select . "</td> <td> <a id='{$id}' class='remove ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' data-item='user' data-rel='popup' data-position-to='window' data-transition='pop' href='#popupDialog'>Remove</a> </td> </tr> ";
 	}
 }

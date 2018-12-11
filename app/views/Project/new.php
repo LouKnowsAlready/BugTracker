@@ -46,7 +46,7 @@
 										<input class="priority-color" type="color" name="priorities[priority_color][new][]" value="' . $priority['pcolor'] . '" />
 									</td>
 									<td>
-										<a id="delete" class="remove_priority ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext" href="#">Remove</a>
+										<a id="delete" class="remove ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext" href="#">Remove</a>
 									</td>
 								</tr> ';
 							}
@@ -60,13 +60,13 @@
 				<small>List of status that can be used within the project.</small>
 				<div id="status_list">
 					<div>
-						<input type='text' name='status[new][]' value="Not Started" /><a id='delete' class='remove_status  ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' href='#'>Remove</a>
+						<input type='text' name='status[new][]' value="Not Started" /><a id='delete' class='remove  ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' href='#'>Remove</a>
 					</div>
 					<div>
-						<input type='text' name='status[new][]' value="In Progress" /><a id='delete' class='remove_status  ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' href='#'>Remove</a>
+						<input type='text' name='status[new][]' value="In Progress" /><a id='delete' class='remove  ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' href='#'>Remove</a>
 					</div>
 					<div>
-						<input type='text' name='status[new][]' value="Completed" /><a id='delete' class='remove_status  ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' href='#'>Remove</a>
+						<input type='text' name='status[new][]' value="Completed" /><a id='delete' class='remove  ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' href='#'>Remove</a>
 					</div>										
 				</div>
 				<input type="button" id="add_status" data-inline="true" value="Add Status">

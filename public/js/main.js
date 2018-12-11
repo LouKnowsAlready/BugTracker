@@ -1,5 +1,10 @@
 $(document).ready(function() {  
 	
+	var user_cnt = 0;
+	var tag_cnt = 0;
+	var priority_cnt = 0;
+	var stat_cnt = 0;
+
 	// User New Form: Add and Remove Users
 	$("#bug").on("click", "#add_user" , function() { 	
 		$.ajax({
@@ -11,39 +16,54 @@ $(document).ready(function() {
 		});	
 	 });
 
-	$("#bug").on("click", "a.remove_user", function() { 	
+	/*
+	$("#bug").on("click", "a.remove", function() { 	
 		$(this).parents('tr').remove();
 	 });
+	*/
+
 	// end
 
 	// User New Form: Add and Remove Tags
 	$("#bug").on("click", "#add_tag" ,function() {
-		$("#tag_list").append("<div><input type='text' name='tags[new][]' /><a id='delete' class='remove_tag ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' href='#'>Remove</a></div>").enhanceWithin();
+		var id = tag_cnt++;
+		$("#tag_list").append("<div class='tag-div'><input type='text' name='tags[new][]' /><a id='tag-new-" + id + "' class='remove ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' data-item='tag' data-rel='popup' data-position-to='window' data-transition='pop'  href='#popupDialog'>Remove</a></div>").enhanceWithin();
 	});
 
-	$("#bug").on("click", "a.remove_tag", function() { 	
+	/*	
+	$("#bug").on("click", "a.remove", function() { 	
 		$(this).parent().remove();
 	 });
+	*/
+
 	// end
 
 	// User New Form: Add and Remove Priorities
 	$("#bug").on("click", "#add_priority" , function() {
-		$("#priority_list").append("<tr><td><input type='text' name='priorities[priority_name][new][]' placeholder='Priority name' /></td><td><input type='number' name='priorities[priority_weight][new][]' placeholder='Priority Weight' /></td><td><input class='priority-color' type='color' name='priorities[priority_color][new][]' value='#ff0000' /></td><td><a id='delete' class='remove_priority ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' href='#'>Remove</a></td></tr>").enhanceWithin();
+		var id = priority_cnt++;
+		$("#priority_list").append("<tr><td><input type='text' name='priorities[priority_name][new][]' placeholder='Priority name' /></td><td><input type='number' name='priorities[priority_weight][new][]' placeholder='Priority Weight' /></td><td><input class='priority-color' type='color' name='priorities[priority_color][new][]' value='#ff0000' /></td><td><a id='priority-new-" + id + "' class='remove ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' data-item='priority' data-rel='popup' data-position-to='window' data-transition='pop' href='#popupDialog'>Remove</a></td></tr>").enhanceWithin();
 	});
 
-	$("#bug").on("click", "a.remove_priority", function() { 	
+	/*	
+	$("#bug").on("click", "a.remove", function() { 	
 		$(this).parents('tr').remove();
 	 });
+	*/
+
 	//end
 
 	// User New Form: Add and Remove Status
 	$("#bug").on("click", "#add_status", function() {
-		$("#status_list").append("<div><input type='text' name='status[new][]' /><a id='delete' class='remove_status  ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' href='#'>Remove</a></div>").enhanceWithin();
+		var id = stat_cnt++;
+		$("#status_list").append("<div class='stat-div'><input type='text' name='status[new][]' /><a id='status-new-" + id + "' class='remove ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' data-item='status' data-rel='popup' data-position-to='window' data-transition='pop' href='#popupDialog'>Remove</a></div>").enhanceWithin();
 	});
 
-	$("#bug").on("click", "a.remove_status", function() { 	
+	/*
+	$("#bug").on("click", "a.remove", function() { 	
 		$(this).parent().remove();
 	 });
+	*/
+
 	// end	
 
 	$(".new_bug").on("click", function(){
@@ -81,6 +101,10 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+
+	$('.ui-filterable').prependTo('#bug-menu');
+		
 
 	$("#edit").on("click", function(){
 		$("#action").empty();
@@ -142,7 +166,72 @@ $(document).ready(function() {
 
 	/*******************************************************************************/
 
+	// pop-up for delete project
+	$("#del-project").on('click', function(){
+		var data = $(this).attr("data-id");
+		var header = "Delete Project?";
+		var msg = "Are you sure you want to delete this project?";
+		var popup_href = "/project/delete/" + data;
+
+		$("#pop-up-header").text(header);
+		$("#pop-up-msg").text(msg);
+		$("#del-pop-up").attr("href", popup_href);
+
+	});
+
+	// update attributes of delete button of popup menu
+	$("#bug").on("click", "a.remove", function() { 	
+		var id = $(this).attr('id');
+		var item = $(this).attr('data-item');
+		var header = "";
+		var msg = "Are you sure you want to delete this ";
+
+		if(item == "user"){
+			header = "Delete User?";
+			msg = msg + "user?";
+			$("#del-pop-up").attr("data-el", "tr");
+		}else if(item == "tag"){
+			header = "Delete Tag?";
+			msg = msg + "tag?";
+			$("#del-pop-up").attr("data-el", "div.tag-div");
+		}else if(item == "priority"){
+			header = "Delete Priority?";
+			msg = msg + "priority?";
+			$("#del-pop-up").attr("data-el", "tr");
+		}else{
+			header = "Delete Status?";
+			msg = msg + "status?";
+			$("#del-pop-up").attr("data-el", "div.stat-div");
+		}
+
+		$("#pop-up-header").text(header);
+		$("#pop-up-msg").text(msg);
+		$("#del-pop-up").attr("data-id", id);
+		$("#del-pop-up").attr("data-hint", "1");		
+		//$(this).parent().remove();
+	 });
+
+	// remove elements
+	$("#del-pop-up").on("click", function(){
+		var hint = $(this).attr('data-hint');
+		var id = $(this).attr('data-id');
+		id = '#' + id;
+		var el = $(this).attr('data-el');
+
+		if(hint == "1"){
+			$('#popupDialog').popup("close");
+			$(id).parents(el).remove();
+		}
+	});
+
+
+
 });
+
+
+
+
+
 
 
 /****** Called functions from JQUERY ready function ***********/

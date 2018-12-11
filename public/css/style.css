@@ -251,7 +251,7 @@ h3.project-heading img{
 
 
 /************* Project Form *******************/
-a#delete:after {
+a.remove:after {
 	background-color: rgb(179, 0, 0);
 }
 
