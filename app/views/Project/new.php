@@ -5,6 +5,20 @@
 		<hr>
 		<label> Project Settings </label>
 		<div id='project-settings-panel'>
+
+			<!-- DELETE popup message  -->
+			<div data-role="popup" id="popupDialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+		        <div data-role="header" data-theme="a">
+				    <h1 id="pop-up-header">Insert Popup Header Here</h1>
+				</div>
+			    <div role="main" class="ui-content">
+			        <p id="pop-up-msg" class="ui-title"> Insert Popup Message Here</p>
+			        <a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
+			        <a id="del-pop-up" data-hint="0" data-el="#" data-id="#" href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" rel="external">Delete</a>
+		        </div>
+			</div>
+			<!-- end -->
+
 			<div id="user-panel" data-role="collapsible" data-collapsed="false">
 				<h3> Users </h3>
 				<small>List of users that can be selected within the project and their corresponding permissions.</small>
@@ -34,6 +48,8 @@
 							array_push($priorities,$critical,$high,$medium,$low);
 
 							foreach ($priorities as $priority) {
+								$id = uniqid();
+
 								echo '
 								<tr>
 									<td>
@@ -46,7 +62,7 @@
 										<input class="priority-color" type="color" name="priorities[priority_color][new][]" value="' . $priority['pcolor'] . '" />
 									</td>
 									<td>
-										<a id="delete" class="remove ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext" href="#">Remove</a>
+										<a id="'. $id .'" class="remove ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext" data-item="priority" data-rel="popup" data-position-to="window" data-transition="pop"  href="#popupDialog">Remove</a>
 									</td>
 								</tr> ';
 							}
@@ -59,14 +75,14 @@
 				<h3>Status</h3>
 				<small>List of status that can be used within the project.</small>
 				<div id="status_list">
-					<div>
-						<input type='text' name='status[new][]' value="Not Started" /><a id='delete' class='remove  ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' href='#'>Remove</a>
+					<div class="stat-div">
+						<input type='text' name='status[new][]' value="Not Started" /><a id="<?php echo uniqid(); ?>" class='remove  ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' data-item='status' data-rel='popup' data-position-to='window' data-transition='pop' href='#popupDialog'>Remove</a>
 					</div>
-					<div>
-						<input type='text' name='status[new][]' value="In Progress" /><a id='delete' class='remove  ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' href='#'>Remove</a>
+					<div class="stat-div">
+						<input type='text' name='status[new][]' value="In Progress" /><a id="<?php echo uniqid(); ?>" class='remove  ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' data-item='status' data-rel='popup' data-position-to='window' data-transition='pop' href='#popupDialog'>Remove</a>
 					</div>
-					<div>
-						<input type='text' name='status[new][]' value="Completed" /><a id='delete' class='remove  ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' href='#'>Remove</a>
+					<div class="stat-div">
+						<input type='text' name='status[new][]' value="Completed" /><a id="<?php echo uniqid(); ?>" class='remove  ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' data-item='status' data-rel='popup' data-position-to='window' data-transition='pop' href='#popupDialog'>Remove</a>
 					</div>										
 				</div>
 				<input type="button" id="add_status" data-inline="true" value="Add Status">
