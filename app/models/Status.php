@@ -28,4 +28,17 @@ class Status extends Model{
 		return $data;
 	}
 
+	public static function get_last_status_per_project($project_id){
+		$db = new DbConnect();
+		$conn = $db->connect();
+
+		$sql = "SELECT id FROM bug_status WHERE project_id = {$project_id} ORDER BY id desc LIMIT 1";
+		$result = mysqli_query($conn, $sql);
+		$data = mysqli_fetch_assoc($result);
+		mysqli_free_result($result);
+
+		mysqli_close($conn);
+		return $data;		
+	}
+
 }

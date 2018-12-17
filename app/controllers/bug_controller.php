@@ -40,6 +40,14 @@ class BugController extends Controller{
 		header("Location: /bug/index/{$project_id}/{$user_id}/{$bug_status}");
 	}
 
+	public function ajax_update($bug_id){
+		if(isset($_POST['bug'])){
+			$Bug_obj = $this->get_model($this->model_name);
+			$filter = "id = {$bug_id}";
+			$Bug_obj->update($_POST['bug'], 'bugs', $filter);
+		}
+	}	
+
 	public function new($project_id){
 		$data['project_id'] = $project_id;
 

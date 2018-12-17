@@ -225,6 +225,35 @@ $(document).ready(function() {
 	});
 
 
+	$("#bug").on("click",".uncheck", function(){
+		var elem = $(this);
+		var bug_id = $(this).attr('data-id');
+		var project_id = $('#bug-info').attr('data-project');		
+		var user_id = $('#bug-info').attr('data-user');
+		var status_id = $('#bug-info').attr('data-status');
+		var comp_status = $('#bug-info').attr('data-status-comp');		
+		var url = '/bug/index/' + project_id + '/' + user_id + '/' + status_id;
+		var bug = {status_id: comp_status};
+
+		if(status_id != comp_status){
+			$.ajax({
+				url: '/bug/ajax_update/' + bug_id,
+				method: "POST",
+				dataType: 'text',
+				data: {
+					bug: bug
+				},		
+				success: function(msg){
+					elem.attr('src','/Icons/checked.png');
+					elem.parents("li.bug-check-container").fadeOut(500, function(){
+						window.location.href = url;
+					});
+				}
+			});
+		}
+
+	});
+
 
 });
 

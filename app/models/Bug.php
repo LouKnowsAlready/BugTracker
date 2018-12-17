@@ -49,7 +49,7 @@ class Bug extends Model{
 		$db = new DbConnect();
 		$conn = $db->connect();
 
-		$sql = "SELECT b.id, b.project_id, b.bug_name, b.position, b.assigned_to, b.priority_id, p.priority_weight, b.status_id, b.details FROM bugs b LEFT JOIN priorities p on p.id = b.priority_id WHERE b.project_id = {$project_id} AND b.assigned_to = {$user_id} AND b.status_id = {$status_id}";
+		$sql = "SELECT b.id, b.project_id, b.bug_name, b.position, b.assigned_to, b.priority_id, p.priority_weight, b.status_id, b.details, p.priority_color FROM bugs b LEFT JOIN priorities p on p.id = b.priority_id WHERE b.project_id = {$project_id} AND b.assigned_to = {$user_id} AND b.status_id = {$status_id}";
 		
 		$result = mysqli_query($conn, $sql);
 		$data = mysqli_fetch_all($result,MYSQLI_ASSOC);
@@ -77,7 +77,7 @@ class Bug extends Model{
 		$db = new DbConnect();
 		$conn = $db->connect();
 
-		$sql = "SELECT b.id, b.project_id, b.bug_name, b.position, b.assigned_to, b.priority_id, p.priority_weight, b.status_id, b.details FROM bugs b LEFT JOIN priorities p on p.id = b.priority_id WHERE b.project_id = {$project_id} AND b.assigned_to = {$user_id} AND b.status_id = {$status_id} ORDER BY position";
+		$sql = "SELECT b.id, b.project_id, b.bug_name, b.position, b.assigned_to, b.priority_id, p.priority_weight, b.status_id, b.details, p.priority_color FROM bugs b LEFT JOIN priorities p on p.id = b.priority_id WHERE b.project_id = {$project_id} AND b.assigned_to = {$user_id} AND b.status_id = {$status_id} ORDER BY position";
 		
 		$result = mysqli_query($conn, $sql);
 		$data = mysqli_fetch_all($result,MYSQLI_ASSOC);

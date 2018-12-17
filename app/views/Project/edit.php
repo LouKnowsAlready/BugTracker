@@ -102,7 +102,8 @@
 
 			<div data-role="collapsible" data-collapsed="false">
 				<h3>Status</h3>
-				<small>List of status that can be used within the project.</small>
+				<small>List of status that can be used within the project.</small> <br>
+				<small>First entry is treated as first item. And last entry is treated as last item (done/completed).</small>
 				<div id="status_list">
 					<?php
 						foreach($status as $stat){

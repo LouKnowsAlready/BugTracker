@@ -73,7 +73,8 @@
 			</div>
 			<div data-role="collapsible" data-collapsed="false">
 				<h3>Status</h3>
-				<small>List of status that can be used within the project.</small>
+				<small>List of status that can be used within the project.</small> <br>
+				<small>First entry is treated as first item. And last entry is treated as last item (done/completed).</small>
 				<div id="status_list">
 					<div class="stat-div">
 						<input type='text' name='status[new][]' value="Not Started" /><a id="<?php echo uniqid(); ?>" class='remove  ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' data-item='status' data-rel='popup' data-position-to='window' data-transition='pop' href='#popupDialog'>Remove</a>
