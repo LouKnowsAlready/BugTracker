@@ -2,7 +2,7 @@
 	#echo dirname(dirname(__DIR__)).'\test\test_data.php';
 	#include(dirname(dirname(__DIR__)).'\test\test_data.php');
 
-	$projects = Project::get_all_projects();
+	$projects = Project::get_all_projects($user_session_id);
 
 	function expand($item1, $item2){
 		return $item1 == $item2 ? "data-collapsed='false'" : "";

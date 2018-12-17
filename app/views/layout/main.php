@@ -1,3 +1,14 @@
+<?php
+	session_start();
+
+	if(isset($_SESSION['uid'])){
+		$user_session_id = $_SESSION['uid'];
+		$user_session = User::get_user_details($user_session_id);
+	}else{
+		header("Location: /login");
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -33,6 +44,14 @@
 						<div class="top-nav">
 							<a href="#bug" class="active ui-btn ui-btn-inline ui-btn-icon-left ui-icon-bug"> Bugs </a>
 							<a href="#checklister" class="ui-btn ui-btn-inline ui-btn-icon-left ui-icon-checklister"> Checklister </a>
+							<?php 
+								if(isset($_SESSION['uid'])){
+									echo '<div id="logout">
+											<small> Hi ' . $user_session['first_name'] . '</small> | 
+											<a rel="external" href="/login/destroy_session"><small>Log Out</small> </a>
+										  </div>';
+								}
+							?>
 						</div>
 						<!-- Tab contents  -->
 						<div class="tab-container">

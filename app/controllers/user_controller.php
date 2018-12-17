@@ -31,4 +31,5 @@ class UserController extends Controller{
 
 		echo '<tr><td>' . $user_select . '</td> <td>' . $role_select . "</td> <td> <a id='{$id}' class='remove ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' data-item='user' data-rel='popup' data-position-to='window' data-transition='pop' href='#popupDialog'>Remove</a> </td> </tr> ";
 	}
+
 }

@@ -1,3 +1,17 @@
+<?php
+
+	if(isset($_SESSION['uid'])){
+		$user_session_id = $_SESSION['uid'];
+		$user_session = User::get_user_details($user_session_id);
+	}else{
+		header("Location: /login");
+	}
+
+	$roles = Role::get_all_roles();
+	$uniq_id = uniqid();
+
+?>
+
 <div id="project-settings">
 	<form action="/project/create" method="POST" data-ajax="false">
 		<label>Project Name</label>
@@ -24,6 +38,29 @@
 				<small>List of users that can be selected within the project and their corresponding permissions.</small>
 				<div>
 					<table id="user_list">
+						<tr>
+							<td>
+								<input type="hidden" name='users[new][]' <?php echo "value='{$user_session_id}'"; ?> />
+								<select name='#' disabled>
+									<option value='#'>
+										<?php
+											echo $user_session['name'];
+										?>
+									</option>
+								</select>
+							</td>
+							<td>
+								<select name='roles[new][]'>
+									<?php
+										foreach($roles as $role){
+													echo "<option value='" . $role['id'] . "'>" . $role['role_name'] . '</option>';
+												}										
+									?>
+								</select>
+							</td>
+							<td>
+								<a id="<?php echo $uniq_id; ?>" class='ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext' data-item='user' data-rel='popup' data-position-to='window' data-transition='pop' href='#popupDialog' style="pointer-events: none;">Remove</a>
+							</td>
 					</table>
 				</div>
 				<input type="button" id="add_user" data-inline="true" value="Add User">
