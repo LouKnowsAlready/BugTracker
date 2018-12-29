@@ -13,7 +13,7 @@ class LoginController extends Controller{
 		if(isset($_POST['register'])){
 			$login_obj = $this->get_model('Login');
 			$new_user = $_POST['user'];
-			if($this->check_user_availability($new_user['user_name'])){		
+			if(!$this->is_user_exist($new_user['user_name'])){		
 				$user_id = $login_obj->create($new_user,'users');
 				$_SESSION['uid'] = $user_id;
 				header('Location: /');
@@ -30,13 +30,18 @@ class LoginController extends Controller{
 		$password = $_POST['pwd'];
 
 		$Login_obj = $this->get_model('Login');
-		$uid = $Login_obj->verify_user($user_name, $password);
+		$is_exist = $Login_obj->check_availability($user_name);
 
-		if($uid['id']){
-			$_SESSION['uid'] = $uid['id'];
-			header('Location: /');
+		if($is_exist){
+			$uid = $Login_obj->verify_credentials($user_name, $password);
+			if($uid['id']){
+				$_SESSION['uid'] = $uid['id'];
+				header('Location: /');
+			}else{
+				header('Location: /login?error=Invalid password');
+			}
 		}else{
-			header('Location: /login?error=No user found');
+			header('Location: /login?error=User not found');
 		}
 	}
 
@@ -47,7 +52,7 @@ class LoginController extends Controller{
 		header('Location: /');
 	}
 
-	private function check_user_availability($username){
+	private function is_user_exist($username){
 		$login_obj = $this->get_model('Login');
 
 		return $login_obj->check_availability($username);		

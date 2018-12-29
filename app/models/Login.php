@@ -6,20 +6,20 @@ class Login extends Model{
 		$db = new DbConnect();
 		$conn = $db->connect();
 
-		$available = 1;
+		$is_exist = 0;
 
 		$sql = "SELECT 1 FROM users WHERE user_name = '{$username}'";
 		$result = mysqli_query($conn, $sql);
 		if(mysqli_num_rows($result))
-			$available = 0;
+			$is_exist = 1;
 
 		mysqli_free_result($result);
 
 		mysqli_close($conn);
-		return $available;		
+		return $is_exist;		
 	}
 
-	public function verify_user($user_name, $password){
+	public function verify_credentials($user_name, $password){
 		$db = new DbConnect();
 		$conn = $db->connect();
 
