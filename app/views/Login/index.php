@@ -28,12 +28,29 @@
 
 		<section class="main-container">
 			<div class="main-wrapper">
-				<h2>Register</h2>
+
+				<?php
+					if(isset($_GET['error'])) {
+				?>
+
+					<div class="alert">
+					  <span class="closebtn">&times;</span>
+					  <?php echo $_GET['error']; ?>
+					</div>
+
+				<?php
+					}
+				?>
+
+				<h2>SIGN UP</h2>
 				<form class="signup-form" action="/login/register" method="POST">
-					<input type="text" name="user[user_name]" placeholder="Username">
-					<input type="password" name="user[password]" placeholder="Password">
-					<input type="text" name="user[first_name]" placeholder="First Name">
-					<input type="text" name="user[last_name]" placeholder="Last Name">
+					<div id="note">
+						<small><em><b>Note:</b> All fields are required</em></small>
+					</div>				
+					<input type="text" name="user[user_name]" placeholder="Username" required>
+					<input type="password" name="user[password]" placeholder="Password" required>
+					<input type="text" name="user[first_name]" placeholder="First Name" required>
+					<input type="text" name="user[last_name]" placeholder="Last Name" required>
 					<button type="submit" name="register"> Register </button>
 				</form>
 			</div>
@@ -42,4 +59,6 @@
 
 
 	</body>
+	<script src="/js/jquery-1.11.1.min.js"></script>
+	<script src="/js/login.js"></script>
 </html>

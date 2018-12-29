@@ -1,20 +1,23 @@
-.main-wrapper{
-	margin: 0 auto;
-	width: 1000px;
-}
-
 body{
-	background-color: #ccc;
+	/*background-color: #ccc; */
+	background-color: rgb(175, 202, 221);
 }
 
 a{
 	text-decoration: none;
 }
 
+.main-wrapper{
+	margin: 0 auto;
+	width: 1000px;
+	font-family: arial;
+}
+
 header nav{
 	width: 100%;
 	height: 60px;
-	background-color: #fff;
+	/* background-color: #fff; */
+	background-color: rgb(35, 49, 75);
 }
 
 header .nav-login{
@@ -33,7 +36,7 @@ header .nav-login form input{
 	padding: 0px 10px;
 	margin-right: 10px;
 	border: none;
-	background-color: #ccc;
+	/*background-color: #ccc; */
 	font-family: arial;
 	font-size: 14px;
 	color: #111;
@@ -76,9 +79,9 @@ header .nav-login a{
 }
 
 .main-container h2{
-	font-family: arial;
+	font-family: 'Nunito', sans-serif;
 	font-size: 40px;
-	color: #111;
+	color: #464545;
 	line-height: 50px;
 	text-align: center;
 }
@@ -120,3 +123,40 @@ header .nav-login a{
 .signup-form button:hover{
 	background-color: #111;
 }
+
+.signup-form #note{
+	color: red;
+	margin-bottom: 5px;
+}
+
+/********** Begin - Error message **********/
+
+/* The alert message box */
+.alert {
+  padding: 20px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+  width: 400px;
+  margin: auto;
+  font-family: arial;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
+
+/********** End   - Error message **********/
+

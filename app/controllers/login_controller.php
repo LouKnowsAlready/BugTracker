@@ -18,7 +18,7 @@ class LoginController extends Controller{
 				$_SESSION['uid'] = $user_id;
 				header('Location: /');
 			}else{
-				header('Location: /login');
+				header('Location: /login?error=Username\'s already taken');
 			}
 		}
 	}
@@ -36,7 +36,7 @@ class LoginController extends Controller{
 			$_SESSION['uid'] = $uid['id'];
 			header('Location: /');
 		}else{
-			header('Location: /login');
+			header('Location: /login?error=No user found');
 		}
 	}
 
